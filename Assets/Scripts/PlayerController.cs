@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     Rigidbody player;
-    public bool grounded = true;
+    public bool grounded;
     public bool wall = false;
     KeyCode jump = KeyCode.UpArrow;
 
@@ -17,20 +17,28 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GetComponent<Rigidbody>();
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+        player.constraints |= RigidbodyConstraints.FreezeRotation; 
+        player.constraints |= RigidbodyConstraints.FreezePositionZ;
+        grounded = false;
+        
+    }
+
+    // Update is called once per frame
+    void FixedUpdate () {
+
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
         Debug.Log(moveHorizontal);
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * Time.deltaTime * speed;
+        Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f) * speed;
         player.AddForce(movement * speed);
-
+        
+        if (grounded)
+            player.constraints |= RigidbodyConstraints.FreezePositionY;
         //player.transform.Translate(moveHorizontal * Time.deltaTime * speed, 0.0f, 0.0f);
         //player.MovePosition(transform.position + movement);
 
         if (Input.GetKeyDown(jump) && grounded) 
         {
+            player.constraints &= ~RigidbodyConstraints.FreezePositionY;
             GetComponent<Rigidbody>().velocity = Vector3.up * jumpVelocity;
             grounded = !grounded;
         }
@@ -51,6 +59,10 @@ public class PlayerController : MonoBehaviour {
         {
             grounded = true;
         }
+        else
+        {
+            grounded = !grounded;
+        }
 
         if (other.collider.CompareTag("Wall") && !grounded) 
         {
@@ -61,6 +73,7 @@ public class PlayerController : MonoBehaviour {
     {
         /*if (other.collider.CompareTag("Floor"))
         {
+            player.constraints &= ~RigidbodyConstraints.FreezePositionY;
             grounded = false;
         }*/
 
