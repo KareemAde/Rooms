@@ -100,20 +100,4 @@ public class PhysicsObject : MonoBehaviour
 
         rb2d.position = rb2d.position + move.normalized * distance;
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Death");
-
-        if (collision.gameObject.name == "Hazard")
-        {
-            Debug.Log("Death");
-            rb2d.gameObject.SetActive(false);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Death");
-    }
 }

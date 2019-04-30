@@ -34,6 +34,4 @@ public class PlayerControllerFinal : PhysicsObject
 
         targetVelocity = move * maxSpeed;
     }
-
-  
 }
