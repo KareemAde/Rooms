@@ -154,6 +154,8 @@ MonoBehaviour:
   gameManager: {fileID: 7275086581815358967, guid: 87e2982764d4f174d94ff61dc8c3f334,
     type: 3}
   AI: {fileID: 8369708280211918069, guid: 293ee21beba093b469e5299abbab9f1c, type: 3}
+  levelData: {fileID: 3054090092486050096, guid: 3efd352169136df478f6c1ada510f8d3,
+    type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class DifficultyDeterminator : MonoBehaviour
 
     double skillLevel = 0;
     public int penalty;
-    float averageLevelTime = 10.85f;
+    float averageLevelTime = 0; //Collect from each level
 
     public static int deathCount = 0;
     public static float levelTime = 0.0f;
@@ -26,6 +26,8 @@ public class DifficultyDeterminator : MonoBehaviour
 
     public void Determinator()
     {
+        averageLevelTime = LevelData.averageTime;
+
         if (levelTime < averageLevelTime)
         {
             Debug.Log("Skill Level: " + levelTime);
